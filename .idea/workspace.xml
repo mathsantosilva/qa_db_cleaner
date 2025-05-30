@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a44e87a5-8eef-4884-a4c5-f0a299073e4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/qa_db_cleaner.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sql_scripts/db_creation/create_qa_management.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sql_scripts/jobs/job_sync_control.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logger.py" afterDir="false" />
-    </list>
+    <list default="true" id="a44e87a5-8eef-4884-a4c5-f0a299073e4e" name="Changes" comment="Criado projeto db cleaner para realizar a limpeza dos bancos de QA" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,7 +105,20 @@
       <option name="presentableId" value="Default" />
       <updated>1748546234502</updated>
     </task>
+    <task id="LOCAL-00001" summary="Criado projeto db cleaner para realizar a limpeza dos bancos de QA">
+      <option name="closed" value="true" />
+      <created>1748570469568</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1748570469568</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Criado projeto db cleaner para realizar a limpeza dos bancos de QA" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criado projeto db cleaner para realizar a limpeza dos bancos de QA" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
