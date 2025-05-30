@@ -1,14 +1,15 @@
 -- Criação do banco de gerenciamento
-CREATE DATABASE qa_management;
+CREATE DATABASE QA_MANAGEMENT;
 GO
 
 -- Usar o banco recém-criado
-USE qa_management;
+USE QA_MANAGEMENT;
 GO
 
 -- Tabela de controle dos bancos QA
 CREATE TABLE bancos_qa (
-    nome_banco     VARCHAR(255) PRIMARY KEY,
+    id              INT IDENTITY(1,1) PRIMARY KEY,
+    nome_banco     VARCHAR(255)  NOT NULL,
     data_insercao  DATETIME      NOT NULL DEFAULT GETDATE(),
     data_expiracao DATETIME      NULL,
     pode_apagar    BIT           NOT NULL DEFAULT 0
