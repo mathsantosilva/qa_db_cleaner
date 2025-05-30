@@ -4,14 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a44e87a5-8eef-4884-a4c5-f0a299073e4e" name="Changes" comment="Criado projeto db cleaner para realizar a limpeza dos bancos de QA">
+    <list default="true" id="a44e87a5-8eef-4884-a4c5-f0a299073e4e" name="Changes" comment="Entregando o restante dos arquivos">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql_scripts/jobs/job_sync_control.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/jobs/job_sync_control.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/qa_db_cleaner.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -107,7 +113,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-14705d77f0bb-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.25659.43" />
+        <option value="bundled-python-sdk-f78a9d071105-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.26574.90" />
       </set>
     </attachedChunks>
   </component>
@@ -136,7 +142,23 @@
       <option name="project" value="LOCAL" />
       <updated>1748570589573</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Inserido script para a criação do job no agent sql">
+      <option name="closed" value="true" />
+      <created>1748574251343</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1748574251343</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Entregando o restante dos arquivos">
+      <option name="closed" value="true" />
+      <created>1748574315773</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1748574315773</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,7 +174,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Criado projeto db cleaner para realizar a limpeza dos bancos de QA" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criado projeto db cleaner para realizar a limpeza dos bancos de QA" />
+    <MESSAGE value="Inserido script para a criação do job no agent sql" />
+    <MESSAGE value="Entregando o restante dos arquivos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Entregando o restante dos arquivos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
