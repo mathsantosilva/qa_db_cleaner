@@ -15,10 +15,7 @@ def get_connection(query, acao=None):
         with pyodbc.connect(conn_str, autocommit=True) as conn:
             cursor = conn.cursor()
             if 'SELECT' in query:
-                if acao:
-                    cursor.execute(query,acao)
-                else:
-                    cursor.execute(query)
+                cursor.execute(query)
                 response = cursor.fetchall()
                 if response:
                     result = [row.nome_banco for row in response]
@@ -30,10 +27,7 @@ def get_connection(query, acao=None):
                 result = True
     except Exception as e:
         erro = str(e)
-        if "3701" in erro or "não existe" in erro.lower():
-            logger.error(f"Banco não encontrado {e}")
-            return None
-        else:
-            logger.error(f"Não foi possivel realizar a conexão com o banco {e}")
+        logger.error(f"Não foi possivel realizar comando SQL devido ao seguinte erro: {erro}")
+        return erro
 
     return result

@@ -1,7 +1,8 @@
-from src.database import get_connection
+from src.database import *
+from src.process import *
 from src.logger import logger
 
-def listar_bancos_para_excluir():
+def exe_list_databases():
     query = '''
     SELECT [nome_banco] FROM qa_management.[dbo].[bancos_qa] 
     WHERE pode_apagar = 1
@@ -9,34 +10,29 @@ def listar_bancos_para_excluir():
     '''
     result = get_connection(query)
     if result:
-        logger.info(f"Consulta dos bancos realiza com sucesso. - {len(result)}")
+        logger.info(f"Consulta dos bancos realiza com sucesso. - Quantidade: {len(result)}")
     else:
         logger.warning(f"Consulta dos bancos não retornou resultados.")
 
     return result
 
-def excluir_bancos(nome_banco):
+def exe_drop_database(nome_banco):
     query = f'''
     DROP DATABASE [{nome_banco}]
     '''
     result = get_connection(query)
-    if result:
+    if result is True:
         logger.info(f"Drop Database realizado com sucesso. - {nome_banco}")
-    elif result is None:
-        logger.warning(f"Banco será retirado da lista por não existir. - {nome_banco}")
-        return True
     else:
-        logger.error(f"Erro ao realizar Drop Database {nome_banco} - {result}.")
-
+        logger.error(f"Erro ao realizar Drop Database {nome_banco}.")
     return result
 
-
-def registrar_historico(nome_banco, acao):
+def exe_insert_log(nome_banco, acao, obs):
     query = '''
-    INSERT INTO historico_bancos_qa (nome_banco, acao, data_acao)
-    VALUES (?, ?, GETDATE())
+    INSERT INTO historico_bancos_qa (nome_banco, acao, data_acao, obs)
+    VALUES (?, ?, GETDATE(), ?)
     '''
-    result = get_connection(query, (nome_banco, acao))
+    result = get_connection(query, (nome_banco, acao, obs))
     if result:
         logger.info(f"Inserido o Log de Drop Database. {nome_banco}")
     else:
@@ -44,8 +40,7 @@ def registrar_historico(nome_banco, acao):
 
     return result
 
-
-def excluir_registro(nome_banco):
+def exe_delete_register(nome_banco):
     query = '''
     DELETE FROM [dbo].[bancos_qa]
     where [nome_banco] = (?)

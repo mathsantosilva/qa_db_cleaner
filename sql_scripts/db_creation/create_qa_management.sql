@@ -20,7 +20,8 @@ GO
 CREATE TABLE historico_bancos_qa (
     id              INT IDENTITY(1,1) PRIMARY KEY,
     nome_banco      VARCHAR(255) NOT NULL,
-    acao            VARCHAR(50)  NOT NULL, -- exemplo: 'exclusao'
-    data_acao       DATETIME     NOT NULL DEFAULT GETDATE()
+    acao            VARCHAR(50)  NOT NULL,
+    data_acao       DATETIME     NOT NULL DEFAULT GETDATE(),
+    obs             VARCHAR(100)  NOT NULL
 );
 GO
