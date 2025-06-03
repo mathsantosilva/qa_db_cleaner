@@ -1,12 +1,25 @@
 from src.process import *
-from src.logger import logger
+from src.logger import *
+from src.execucao import *
+prog_loop = True
 
 if __name__ == "__main__":
-    logger.info(f"Rotina iniciada.")
-    bancos = exe_list_databases()
-    if bancos:
-        for nome_banco in bancos:
-            result_drop = process_drop_database(nome_banco)
-            if process_insert_log(result_drop, nome_banco):
-                process_delete_register(nome_banco)
+    logger.info("Rotina iniciada")
+    while prog_loop:
+        try:
+            if validar_execucao():
+                logger.info("Iniciando execução")
+                bancos = exe_list_databases()
+                if bancos:
+                    for nome_banco in bancos:
+                        result_drop = process_drop_database(nome_banco)
+                        if process_insert_log(result_drop, nome_banco):
+                            process_delete_register(nome_banco)
+                logger.info("Execução Finalizada")
+
+            else:
+                continue
+        except Exception as e:
+            prog_loop = False
+            break
     logger.info("Rotina finalizada")

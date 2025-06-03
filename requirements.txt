@@ -3,3 +3,4 @@ pytest
 python-dotenv
 pytest
 pytest-mock
+PyInstaller

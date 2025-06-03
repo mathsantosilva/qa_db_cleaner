@@ -3,9 +3,9 @@ from logging.handlers import RotatingFileHandler
 import os
 
 # Garante que a pasta logs exista
-os.makedirs("../logs", exist_ok=True)
+os.makedirs(f"./logs", exist_ok=True)
 
-log_file = "../logs/qa_db_cleaner.log"
+log_file = "./logs/qa_db_cleaner.log"
 
 logger = logging.getLogger("qa_cleaner")
 logger.setLevel(logging.INFO)
@@ -13,10 +13,6 @@ logger.setLevel(logging.INFO)
 file_handler = RotatingFileHandler(log_file, maxBytes=5*1024*1024, encoding='utf-8')
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
-
-# Remove handlers antigos para evitar duplicação em execuções múltiplas
-if logger.hasHandlers():
-    logger.handlers.clear()
 
 logger.addHandler(file_handler)
 
