@@ -1,8 +1,6 @@
 .env
 /logs/
 /build/QA_DB_CLEANER.spec
-/build/dist/logs/*
-/build/dist/config.yaml
 /build/dist/*
 /build/build/*
 /src/logs/*
