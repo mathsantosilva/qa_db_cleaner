@@ -4,5 +4,4 @@ python-dotenv
 pytest
 pytest-mock
 PyInstaller
-yaml
-time
+pyyaml
