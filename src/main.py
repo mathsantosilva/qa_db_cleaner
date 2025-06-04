@@ -1,7 +1,10 @@
 from src.process import *
 from src.logger import *
 from src.execucao import *
+import time
+
 prog_loop = True
+pausa_1_dia = 60 * 60 * 24
 
 if __name__ == "__main__":
     logger.info("Rotina iniciada")
@@ -18,6 +21,7 @@ if __name__ == "__main__":
                 logger.info("Execução Finalizada")
 
             else:
+                time.sleep(pausa_1_dia)
                 continue
         except Exception as e:
             prog_loop = False
