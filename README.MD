@@ -1,6 +1,6 @@
 # 🧹 QA DB Cleaner
 
-Este projeto é um utilitário Python para automatizar a **limpeza de bancos QA** em uma instância SQL Server. Ele identifica bancos marcados como "pode apagar", executa o `DROP DATABASE`, e registra a ação em uma tabela de histórico.
+Este projeto é um utilitário Python para automatizar a **limpeza de bancos de QA** em uma instância SQL Server. Ele identifica bancos marcados como "pode apagar", executa o `DROP DATABASE`, registra a ação em uma tabela de histórico e aguarda a próxima execução em uma quantidade de dias determinados.
 
 ## 📦 Estrutura do Projeto
 
@@ -10,13 +10,13 @@ qa_db_cleaner/
 │   └── qa_db_cleaner.log
 │
 ├── src/
-│   ├── __init__.py
 │   ├── banco_repository.py              # Operações com controle e histórico de bancos
 │   ├── config.py                        # Configurações de conexão
 │   ├── database.py                      # Conexão e funções genéricas de banco
+│   ├── execucao.py                      # Valida e controla a execução do programa
 │   ├── logger.py                        # Configuração de logging para o projeto
-│   └── main.py                          # Ponto de entrada
-│   ├── process.py                       # Lógica de exclusão
+│   ├── main.py                          # Ponto de entrada
+│   └── process.py                       # Lógica de exclusão
 │
 ├── sql_scripts/
 │   └── db_creation/
@@ -44,10 +44,10 @@ qa_db_cleaner/
 - 🗑️ Deleta o registro da tabela `bancos_qa`
 
 ## 📜 Regras
-- Os bancos contidos na instancia serão adicionados no banco `bancos_qa` com expiração em 10 dias
-  - Essa regra esta no script presente no job `InsertDatabases`
-- Os registros contidos na tebela `bancos_qa` serão ignorados caso tenham `pode_apagar = true` mesmo que a data de expiração esteja menor que o dia atual
-- Se o `drop_banco()` falhar, o programa não ira para os passos seguintes `inserir_log()` e `remover_registro()`
+- Os bancos contidos na instancia serão adicionados no banco `bancos_qa` com expiração configurável
+  - A regra de expiração está contida dentro do job `Sync_Bancos_QA` na etapa `InsertDatabases`
+- Os registros contidos na tebela `bancos_qa` serão ignorados caso tenham `pode_apagar = False` mesmo que a data de expiração esteja menor que o dia atual
+- Se o `process_drop_database()` falhar, o programa não irá para os passos seguintes `process_insert_log` e `process_delete_register`
 - Todas as ações serão logadas com o seu devido tipo `INFO`, `WARNING` e `ERROR`
 
 ## 🧩 Estrutura das Tabelas
@@ -64,21 +64,21 @@ qa_db_cleaner/
 
 ### `historico_bancos_qa` (Log)
 
-| Campo           | Tipo       | Descrição                        |
-|-----------------|------------|----------------------------------|
-| id              | INT        | ID autoincremento                |
-| nome_banco      | VARCHAR    | Nome do banco excluído           |
-| acao            | VARCHAR    | Tipo de ação (ex: 'exclusao')    |
-| data_acao       | DATETIME   | Data da ação executada           |
+| Campo           | Tipo       | Descrição                             |
+|-----------------|------------|---------------------------------------|
+| id              | INT        | ID autoincremento                     |
+| nome_banco      | VARCHAR    | Nome do banco excluído                |
+| acao            | VARCHAR    | Tipo de ação (ex: 'exclusao')         |
+| data_acao       | DATETIME   | Data da ação executada                |
+| obs             | VARCHAR    | tipo da execução (ex: 'Periodica')    |
 
-## 🚀 Como usar
+## 🛠️ Configurações
+### Arquivo `.env`
+- Será necessário criar o arquivo manualmente, nele será armazenado todas as informações de acesso do banco
+- Se o arquivo não foi encontrado na raiz do programa, ele não irá conseguir efetuar a busca pelos bancos
+- Se o arquivo for inserido após o início do programa, será necessário finalizar o processo e iniciar novamente
 
-1. **Configure a conexão no `.env`:**
-
-Para manter as credenciais seguras e separar a configuração do código, este projeto utiliza um arquivo `.env`.
-
-Crie um arquivo chamado `.env` na raiz do projeto com o seguinte conteúdo:
-
+### Exemplo arquivo .env
 ```dotenv
 # Configurações de conexão com o banco de dados SQL Server
 DB_DRIVER=ODBC Driver 17 for SQL Server
@@ -87,12 +87,37 @@ DB_DATABASE=qa_management
 DB_USERNAME=seu_usuario
 DB_PASSWORD=sua_senha
 ```
+### Arquivo `Yaml`
+- O arquivo config.yaml será criado após a primeira execução do programa
+- Por padrão o campo `tempo_de_espera` vai vir com o valor de 10 dias, podendo ser alterado a qualquer momento durante a execução do programa
+- O campo `ultima_execucao` sempre irá guardar a data da última execução ou vir como Null caso não tenha realizado nenhuma execução
+- O arquivo yaml pode ser modificado ou excluído a qualquer momento do programa em execução que ele irá criar/alterar sem problemas
 
-2. **Instale as dependências:**
+### Exemplo arquivo Yaml
+```yaml
+tempo_de_espera: 10
+ultima_execucao: 03-06-2025-10-44
+```
+
+
+## 🚀 Como executar o programa em Windows/Linux
+1. **Configure a conexão no `.env`:**
+
+Para manter as credenciais seguras e separar a configuração do código, este projeto utiliza um arquivo `.env`.
+Crie um arquivo chamado `.env` na mesma pasta do programa
+
+2 - **Inicie o programa pela primeira vez**
+
+## 🖥️ Como executar o projeto em python
+
+1. **Instale as dependências:**
 
 ```bash
 pip install -r requirements.txt
 ```
+
+2. **Realize a criação do arquivo `.env`**
+- Crie um arquivo chamado .env na raiz do projeto com o conteúdo apresentado acima
 
 3. **Execute o script principal:**
 
