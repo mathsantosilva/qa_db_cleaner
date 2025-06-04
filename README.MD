@@ -47,7 +47,7 @@ qa_db_cleaner/
 - Os bancos contidos na instancia serão adicionados no banco `bancos_qa` com expiração configurável
   - A regra de expiração está contida dentro do job `Sync_Bancos_QA` na etapa `InsertDatabases`
 - Os registros contidos na tebela `bancos_qa` serão ignorados caso tenham `pode_apagar = False` mesmo que a data de expiração esteja menor que o dia atual
-- Se o `process_drop_database()` falhar, o programa não irá para os passos seguintes `process_insert_log` e `process_delete_register`
+- Se o `process_drop_database()` falhar, o programa não irá para os passos seguintes `process_insert_log()` e `process_delete_register()`
 - Todas as ações serão logadas com o seu devido tipo `INFO`, `WARNING` e `ERROR`
 
 ## 🧩 Estrutura das Tabelas
